@@ -1,16 +1,13 @@
-FROM python:3.11-slim
-
-# Define o diretório de trabalho dentro do container
-WORKDIR /app
-
-# Copia o arquivo de dependências (se existir)
-COPY requirements.txt ./
-
-# Instala as dependências
-RUN pip install --no-cache-dir -r requirements.txt || true
-
-# Copia o conteúdo do diretório atual (opcional — pode ser omitido se for usar volume)
-COPY . .
-
-# Comando padrão ao iniciar o container
-CMD ["python", "main.py"]
+1 FROM python
+2
+3 # Instala pacotes necessários:
+4 RUN pip install --no-cache-dir jupyterlab
+5
+6 # Seta o diretório de trabalho (dentro do container):
+7 WORKDIR /home
+8
+9 # Seta porta padrão do jupyter lab:
+10 EXPOSE 8888
+11
+12 # Comando padrão a ser executado quando o container é iniciado:
+13 CMD ["jupyter", "lab", "--ip='*'", "--allow-root"]
