@@ -1,13 +1,18 @@
-FROM nvcr.io/nvidia/pytorch:24.04-py3
+FROM nvcr.io/nvidia/tensorflow:24.04-tf2-py3
 
 
-RUN pip install --no-cache-dir jupyterlab
+RUN pip install --no-cache-dir \
+    jupyter \
+    matplotlib \
+    pandas \
+    scikit-learn \
+    optuna \
+    psycopg2-binary \
+    tensorboard
 
 WORKDIR /home
 
 EXPOSE 8888
 
-RUN useradd -m -s /bin/bash developer
-USER developer
 
 CMD ["bash"]
